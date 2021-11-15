@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { Link } from 'react-router-dom';
 
 
 const Appointments = ({ date }) => {
@@ -14,7 +15,7 @@ const Appointments = ({ date }) => {
     const [appointments, setAppointments] = useState([])
     console.log(appointments)
     useEffect(() => {
-        const url = `https://infinite-brook-63682.herokuapp.com/appointments?email=${user.email}&date=${date?.toLocaleDateString()}`
+        const url = `http://localhost:5000/appointments?email=${user.email}&date=${date?.toLocaleDateString()}`
 
         fetch(url, {
             headers: {
@@ -49,6 +50,11 @@ const Appointments = ({ date }) => {
                                 </TableCell>
                                 <TableCell align="right">{row.time}</TableCell>
                                 <TableCell align="right">{row.serviceName}</TableCell>
+                                <TableCell align="right">{row.payment ? 'Paid' :
+                                <Link to={`/dashboard/payment/${row._id}`}>
+                                 <button className='btn btn-success'>Pay</button>
+                                </Link>
+                                }</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

@@ -27,6 +27,7 @@ import MakeAdmin from './MakeAdmin/MakeAdmin';
 import AddDoctor from './AddDoctor/AddDoctor';
 import useAuth from '../../Hooks/useAuth';
 import AdminRoute from '../Login/AdminRoute/AdminRoute';
+import Payment from './Pyment/Payment';
 
 
 
@@ -143,6 +144,9 @@ function DashBoard(props) {
                     <Route exact path={path}>
                         <DashBoardHome
                         ></DashBoardHome>
+                    </Route>
+                    <Route  path={`${path}/payment/:appointmentId`}>
+                       <Payment></Payment>
                     </Route>
                     <AdminRoute path={`${path}/makeAdmin`}>
                         <MakeAdmin></MakeAdmin>

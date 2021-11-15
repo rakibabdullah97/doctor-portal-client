@@ -10,7 +10,7 @@ import useAuth from '../../../Hooks/useAuth';
 import { useState } from 'react'
 
 const BookingModal = ({ openBooking, handleBookingClose, booking, date,setBookedSuccess }) => {
-    const { name, time } = booking
+    const { name, time ,price} = booking
     const { user } = useAuth()
 
     const initialInfo = { patientName: user.displayName, email: user.email, phone: '' }
@@ -42,12 +42,13 @@ const BookingModal = ({ openBooking, handleBookingClose, booking, date,setBooked
 
         const appointment = {
             ...bookingInfo,
+            price, 
             time,
             serviceName: name,
             date: date.toLocaleDateString()
         }
         // send to server
-        fetch('https://infinite-brook-63682.herokuapp.com/appointments',{
+        fetch('http://localhost:5000/appointments',{
             method: 'POST',
             headers: { 'content-type' : 'application/json'},
             body: JSON.stringify(appointment)
